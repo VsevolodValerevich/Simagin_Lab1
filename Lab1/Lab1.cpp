@@ -68,23 +68,40 @@ public:
         std::cout << "CompStation adding\n";
         name = getString("Enter CS name:\n");
         amount_total = getInt("Enter Workshops total amount:\n");
-        int trying = getInt("Enter active Workshops amount:\n");
-        if (trying > amount_total) {
-            while (trying > amount_total) {
-                std::cout << "Active WS amount can not be bigger than total amount";
-                trying = getInt("Enter active WS amount:\n");
-            amount_active = trying;
+        amount_active = getInt("Enter active WS amount:\n");
+        if ((amount_active > amount_total) || (0 > amount_active)) {
+            while ((amount_active > amount_total) || (0 > amount_active)) {
+                std::cout << "Active WS amount can not be bigger than total amount or negative";
+                amount_active = getInt("Enter active WS amount:\n");
             }
         }
-        else{amount_active = trying}
         st_class = getString("Enter CS class:\n");
         is_created = true;
         std::cout << "CS created successfully";
     }
-    void 
+    void print() const {
+        if (!is_created){
+            std::cout << "CS isn't created yet\n";
+            return;
+        }
+        std::cout << "CS: " << name
+            << " Total amount: " << amount_total
+            << " Active amount: " << amount_active
+            << " Class: " << st_class;
+    }
+
+    void editWS() {
+        if (!is_created){
+            std::cout << "CS isn't created yet\n";
+            return;
+        }
+        std::cout << "\nWorkshops Editing\n"
+            << "Total Workshops: " << amount_total << ", Active Workshops: " << amount_active
+            <<
+    }
+        
     
 };
-
 
 
 int main()
