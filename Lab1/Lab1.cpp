@@ -87,7 +87,7 @@ public:
     }
 
     bool getCreatedStatus() const {return is_created; }
-    string getName() const {return name;}
+    std::string getName() const {return name;}
     double getLength() const {return length;}
     double getDiameter() const {return diameter;}
     bool getRepairStatus() const {return inRepair;}
@@ -151,8 +151,8 @@ public:
                     << amount_total << ", Active workshops: " << amount_active << "\n";
             }
         }
-        else if action == 2{
-            if (amout_active == 0){
+        else if (action == 2){
+            if (amount_active == 0){
                 std::cout << "Can't Deactivate Workshop, all workshops are dectivated now";
             }
             else{
