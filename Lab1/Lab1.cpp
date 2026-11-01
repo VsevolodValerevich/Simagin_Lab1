@@ -230,6 +230,47 @@ void loadFromFile(Pipe& pipe, CSt& cs, const std::string& filename) {
     std::cout << "Data loaded from " << filename << "\n";
 }
 
-int main()
-{
+void printMenu() {
+    std::cout << "\n==============================\n";
+    std::cout << "1. Add Pipe\n";
+    std::cout << "2. Add CS\n";
+    std::cout << "3. Print all objects\n";
+    std::cout << "4. Edit Pipe (toggle repair)\n";
+    std::cout << "5. Edit CS (activate/deactivate WS)\n";
+    std::cout << "6. Save to file\n";
+    std::cout << "7. Load from file\n";
+    std::cout << "0. Exit\n";
+    std::cout << "==============================\n";
+}
+
+int main() {
+    Pipe mainPipe;
+    CSt mainCS;
+    std::string filename = "data.txt";
+    int choice;
+
+    while (true) {
+        printMenu();
+        choice = getInt("Choose an action: ");
+
+        switch (choice) {
+            case 1: mainPipe.add(); break;
+            case 2: mainCS.add(); break;
+            case 3: 
+                mainPipe.print(); 
+                mainCS.print(); 
+                break;
+            case 4: mainPipe.toggleRepair(); break;
+            case 5: mainCS.editWS(); break;
+            case 6: saveToFile(mainPipe, mainCS, filename); break;
+            case 7: loadFromFile(mainPipe, mainCS, filename); break;
+            case 0: 
+                std::cout << "Exiting program.\n"; 
+                return 0;
+            default: 
+                std::cout << "Invalid menu choice.\n"; 
+                break;
+        }
+    }
+    return 0;
 }
