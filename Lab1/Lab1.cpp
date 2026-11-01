@@ -96,13 +96,13 @@ public:
         name = n; length = l; diameter = d; inRepair = r; is_created = true;
     }
 };
-class CSt(){
+class CSt {
 private:
     std::string name;
     int amount_total;
     int amount_active;
     std::string st_class;
-    bool is_created
+    bool is_created;
 public:
     CSt() : amount_total(0), amount_active(0), is_created(false) {}
 
@@ -140,9 +140,9 @@ public:
         std::cout << "\nWorkshops Editing\n"
             << "Total Workshops: " << amount_total << ", Active Workshops: " << amount_active << '\n'
             << "Choose the action:\n1.Activate Workshop\n2.Diactivate Workshop";
-        action = getInt();
-        if action == 1{
-            if (amout_active == amount_total){
+        int action = getInt("Enter action: ");
+        if (action == 1){
+            if (amount_active == amount_total){
                 std::cout << "Can't Activate Workshop, all workshops are active now";
             }
             else{
@@ -151,7 +151,7 @@ public:
                     << amount_total << ", Active workshops: " << amount_active << "\n";
             }
         }
-        if action == 2{
+        else if action == 2{
             if (amout_active == 0){
                 std::cout << "Can't Deactivate Workshop, all workshops are dectivated now";
             }
@@ -161,12 +161,21 @@ public:
                     << amount_total << ", Active workshops: " << amount_active << "\n";
             }
         }
-        if (action != 1 && action != 2){
+        else {
             std::cout << "Invalid action.";
         }
     }
         
-    }
+     bool getCreatedStatus() const { return is_created; }
+        std::string getName() const { return name; }
+        int getAmountTotal() const { return amount_total; }
+        int getAmountActive() const { return amount_active; }
+        std::string getStClass() const { return st_class; }
+
+        void setData(std::string n, int total, int active, std::string c) {
+            name = n; amount_total = total; amount_active = active; st_class = c; is_created = true;
+        }
+    };
 
 
 int main()
