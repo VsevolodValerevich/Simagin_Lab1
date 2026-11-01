@@ -43,7 +43,7 @@ std::string getString(const std::string& prompt) {
     return value;
 }
 
-class Pipe(){
+class Pipe {
 private:
     std::string name;
     double length;
@@ -62,7 +62,7 @@ public:
         int repair_choice = getInt("Is Pipe under repair? \n (1 - Yes, 0 - No) \n");
         inRepair = (repair_choice == 1);
         is_created = true;
-        cout << "Pipe added succesfully\n";
+        std::cout << "Pipe added succesfully\n";
     }
 
     void print() const {
@@ -73,7 +73,7 @@ public:
         std::cout << "Pipe: " << name
             << " length: " << length << " km"
             << " Diameter: " << diameter << " mm"
-            << " In repair: " << (inRepair ? "Yes" : "No") << "\n"
+            << " In repair: " << (inRepair ? "Yes" : "No") << "\n";
     }
 
     void toggleRepair() {
@@ -88,11 +88,11 @@ public:
 
     bool getCreatedStatus() const {return is_created; }
     string getName() const {return name;}
-    double getLength() const {return lenth;}
+    double getLength() const {return length;}
     double getDiameter() const {return diameter;}
     bool getRepairStatus() const {return inRepair;}
 
-    void setData(string n, double l, double d, bool r){
+    void setData(std::string n, double l, double d, bool r){
         name = n; length = l; diameter = d; inRepair = r; is_created = true;
     }
 };
