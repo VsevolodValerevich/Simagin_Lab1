@@ -176,7 +176,59 @@ public:
             name = n; amount_total = total; amount_active = active; st_class = c; is_created = true;
         }
     };
+void saveToFile(const Pipe& pipe, const CSt& cs, const std::string& filename) {
+    std::ofstream file(filename);
+    if (!file.is_open()) {
+        std::cout << "Error opening file!\n";
+        return;
+    }
 
+    file << pipe.getCreatedStatus() << "\n";
+    if (pipe.getCreatedStatus()) {
+        file << pipe.getName() << "\n" << pipe.getLength() << "\n" << pipe.getDiameter() << "\n" << pipe.getRepairStatus() << "\n";
+    }
+
+    file << cs.getCreatedStatus() << "\n";
+    if (cs.getCreatedStatus()) {
+        file << cs.getName() << "\n" << cs.getAmountTotal() << "\n" << cs.getAmountActive() << "\n" << cs.getStClass() << "\n";
+    }
+
+    file.close();
+    std::cout << "Data saved to " << filename << "\n";
+}
+
+void loadFromFile(Pipe& pipe, CSt& cs, const std::string& filename) {
+    std::ifstream file(filename);
+    if (!file.is_open()) {
+        std::cout << "Error: File not found!\n";
+        return;
+    }
+
+    bool pipe_created;
+    file >> pipe_created;
+    if (pipe_created) {
+        std::string n; double l, d; bool r;
+        file.ignore();
+        std::getline(file, n);
+        file >> l >> d >> r;
+        pipe.setData(n, l, d, r);
+    }
+
+    bool cs_created;
+    file >> cs_created;
+    if (cs_created) {
+        std::string n, c; int total, active;
+        file.ignore();
+        std::getline(file, n);
+        file >> total >> active;
+        file.ignore();
+        std::getline(file, c);
+        cs.setData(n, total, active, c);
+    }
+
+    file.close();
+    std::cout << "Data loaded from " << filename << "\n";
+}
 
 int main()
 {
