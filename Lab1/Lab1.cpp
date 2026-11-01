@@ -1,5 +1,47 @@
 #include <iostream>
 #include <string>
+#include <limits>
+#include <fstream>
+
+void clearInput() {
+    std::cin.clear();
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+}
+
+int getInt(const std::string& prompt) {
+    int value;
+    while (true) {
+        std::cout << prompt;
+        if (std::cin >> value) {
+            clearInput();
+            return value;
+        } else {
+            std::cout << "Error. Enter a number.\n";
+            clearInput();
+        }
+    }
+}
+
+double getDouble(const std::string& prompt) {
+    double value;
+    while (true) {
+        std::cout << prompt;
+        if (std::cin >> value) {
+            clearInput();
+            return value;
+        } else {
+            std::cout << "Error. Enter a number.\n";
+            clearInput();
+        }
+    }
+}
+
+std::string getString(const std::string& prompt) {
+    std::string value;
+    std::cout << prompt;
+    std::getline(std::cin, value);
+    return value;
+}
 
 class Pipe(){
 private:
